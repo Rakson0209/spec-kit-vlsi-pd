@@ -1,0 +1,10 @@
+# 文字檔自動正規化換行；二進位檔不得做換行轉換
+* text=auto
+
+# 題目提供之二進位資產
+*.pdf binary
+*.o   binary
+*.so  binary
+*.a   binary
+# 驗證器（Linux ELF，無副檔名）
+**/verifier/verify binary

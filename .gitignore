@@ -1,0 +1,58 @@
+# =============================================================
+#  spec-kit-vlsi-pd  —  Git ignore rules
+#  原則：只保留「無法重新生成或重生成成本高」的檔案。
+#  可由 build / run 重新產生的一律排除。
+# =============================================================
+
+# ---- 編譯產物 (build artifacts) ----
+**/bin/
+*.o
+*.obj
+*.exe
+*.a
+*.so
+a.out
+# 例外：HW4 (003) 題目提供的預編譯函式庫，無原始碼，編譯必需，必須保留
+!problems/003-global-placement/reference/obj/
+!problems/003-global-placement/reference/obj/*.o
+
+# ---- 執行輸出 (run outputs) ----
+**/output/
+*.out
+*.gp.pl
+*.floorplan
+# 例外：partitioning 的小型範例輸入不是輸出，保留 (見下方 testcase 規則)
+
+# ---- 大型 benchmark 輸入 (partitioning 測資數十 MB，請依各題 benchmark 說明取得) ----
+problems/001-partitioning/benchmark/testcase/public*.txt
+# 保留小型 sample 供快速驗證
+!problems/001-partitioning/benchmark/testcase/sample.txt
+
+# ---- NFS / 系統暫存 ----
+.nfs*
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# ---- Node ----
+node_modules/
+
+# ---- Qwen Code agent 資料夾：保留 spec-kit 命令定義，忽略可能寫入的憑證/session ----
+.qwen/settings.json
+.qwen/*_creds*
+.qwen/oauth*
+.qwen/tmp/
+.qwen/cache/
+
+# ---- 編輯器 / 雜項 ----
+*.log
+*.tmp
+.idea/
+.vscode/

@@ -106,9 +106,11 @@ spec-kit-vlsi-pd/
 
 - **Qwen Code** CLI（SDD agent）
 - **spec-kit**（`specify` CLI，已初始化）
-- **g++**（支援 C++11，baseline 編譯）；003 的 `reference/obj/*.o` 為題目提供之預編譯函式庫
-- 001 使用 **Boost** C++ library
-- Linux 環境執行 `verifier/verify`（ELF 二進位）
+- **計分器 `scorer/`**：純 Python 3.7+，**Windows 原生可跑**，無需編譯器或 Linux（見 [`scorer/README.md`](scorer/README.md)）
+
+> **平台註記**：官方 `verifier/verify`、`baseline`、003 的 `reference/obj/*.o` 皆為 **Linux ELF**，
+> 純 Windows 無法執行/連結（baseline 編譯另需 g++、001 需 Boost）。
+> 因此在純 Windows 下，合法性與指標計算一律改用 `scorer/`（純 Python，已涵蓋各題主要規則）。
 
 ## 注意：大型測資不在 repo 內
 

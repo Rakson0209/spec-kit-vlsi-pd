@@ -54,7 +54,24 @@ benchmark/verifier/verify <input.txt> <output.out>
 
 `benchmark/testcase/public*.txt`（數十 MB）不在 repo 內，見 [`benchmark/README.md`](benchmark/README.md)。
 
+## Baseline 指標門檻（要超越的目標）
+
+最佳化指標為 **cut size（越小越好）**。下表 **Min 為要超越的門檻**（已知最佳結果），
+`Reference` 為人類參考解（baseline）的實測值。runtime 上限約 **300s**（須在此之內完成）。
+
+| testcase | **目標 Min（要 ≤ 此值，越低越好）** | Reference 參考解 | Reference runtime | Max（零分門檻） |
+|---|---:|---:|---:|---:|
+| public1 | **104**  | 193   | 0.03s   | 1,441   |
+| public2 | **816**  | 3,666 | 1.59s   | 27,862  |
+| public3 | **1,762**| 7,092 | 47.95s  | 103,659 |
+| public4 | **982**  | 2,265 | 1.09s   | 12,421  |
+| public5 | **297**  | 1,669 | 15.4s   | 48,964  |
+| public6 | **5,159**| 10,281| 225.47s | 490,120 |
+
+> 依憲章原則 VI（研究先行，超越基準）：各模型在 `research.md` 須以上表 **Min** 為要打敗的門檻，
+> 並記錄自己各 testcase 的 cut size 與 runtime，對比 Min / Reference。
+
 ## 實驗
 
-各模型實作放 [`experiments/<model>/`](experiments/)，SDD 產物放 [`spec/`](spec/)。
+每個模型的完整 SDD 鏈與實作放 [`experiments/<model>/`](experiments/)；該模型自產的 SDD 產物放 `experiments/<model>/spec/`。所有模型共用同一份題目敘述（[`reference/spec.pdf`](reference/) + `benchmark/`）。
 最佳化指標：**cut size**（越小越好），須通過 verifier。

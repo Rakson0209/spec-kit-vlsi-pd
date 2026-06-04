@@ -14,7 +14,7 @@
 # <model> — 002-floorplanning 結果
 
 - 模型 / 版本：
-- SDD 產物：見 ../../spec/
+- SDD 產物（本模型自產）：見 ./spec/
 - 編譯指令：
 - 執行指令：
 

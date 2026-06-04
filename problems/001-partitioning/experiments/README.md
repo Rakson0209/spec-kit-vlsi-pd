@@ -14,7 +14,7 @@
 # <model> — 001-partitioning 結果
 
 - 模型 / 版本：
-- SDD 產物：見 ../../spec/（spec.md / plan.md / tasks.md）
+- SDD 產物（本模型自產）：見 ./spec/（spec.md / plan.md / tasks.md）
 - 編譯指令：
 - 執行指令：
 
@@ -28,4 +28,4 @@
 - 備註（卡關、偏離規格之處）：
 ```
 
-> 比較原則見專案根 `.specify/memory/constitution.md`：同題目所有模型共用同一份 `spec/` 規格，唯一變因是模型。
+> 比較原則見專案根 `.specify/memory/constitution.md`：每個模型從**同一題目敘述**（`reference/spec.pdf` + `benchmark/`）各自產生 spec（放 `./spec/`），唯一變因是模型。

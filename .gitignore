@@ -56,7 +56,9 @@ node_modules/
 .qwen/cache/
 
 # ---- Claude Code 本機 session / 排程狀態（含機器資料） ----
-.claude/
+# 排除 .claude 內容，但保留 speckit 的 SDD slash 命令定義（與 .qwen/commands/ 對等，納入版控以利重現）
+.claude/*
+!.claude/commands/
 
 # ---- spec-kit 本機工作狀態（當前 feature 指標，非成果產物） ----
 .specify/feature.json

@@ -41,21 +41,26 @@ spec-kit-vlsi-pd/
 │   └── 003-global-placement/     # 全域佈局 (Global Placement, 最小化 HPWL)
 │       ├── reference/            # 人類參考解（baseline）：原始碼、spec.pdf、report.pdf
 │       ├── benchmark/            # 共用測資 testcase/ + 驗證器 verifier/
-│       ├── spec/                 # SDD 產物（spec.md / plan.md / tasks.md）
-│       └── experiments/          # 各模型在此題的實作與評測結果
+│       └── experiments/          # 各模型的完整 SDD 鏈 + 實作 + 評測結果
+│           └── <model>/
+│               ├── spec/         # 該模型自產的 SDD 產物（spec.md / plan.md / tasks.md）
+│               └── ...           # 該模型的實作與評測數據
 ├── scorer/                   # ★ 批次計分器（重算指標 + 合法性 + 彙整表格）
 ├── docs/                     # 實驗方法論、結果彙整
 └── README.md
 ```
 
-每個 `problems/NNN-*/` 內固定四個子目錄：
+每個 `problems/NNN-*/` 內固定三個子目錄：
 
 | 子目錄 | 用途 |
 |---|---|
-| `reference/` | 人類參考解（清大 CS6135 作業原始碼）+ 原始題目 `spec.pdf` + `report.pdf`，作為 baseline |
+| `reference/` | 人類參考解（清大 CS6135 作業原始碼）+ 原始題目 `spec.pdf` + `report.pdf`，作為 baseline；**`spec.pdf` 是餵給所有模型的共同題目敘述** |
 | `benchmark/` | `testcase/`（共用測資）與 `verifier/`（官方驗證器），baseline 與各模型實作共用同一份 |
-| `spec/` | 跑 SDD 流程產生的 `spec.md` / `plan.md` / `tasks.md` |
-| `experiments/` | 各模型的實作成果，慣例命名 `<model>/`，並附該次的評測數據 |
+| `experiments/` | 各模型 `<model>/` 各自一份，內含**該模型自產的 SDD 產物 `spec/`**（`spec.md`/`plan.md`/`tasks.md`）、實作與評測數據 |
+
+> **比較基準（v0.2.0 起）**：每個模型從**同一份題目敘述**（`reference/spec.pdf` + `benchmark/`）
+> 各自跑完整 SDD 流程，產出**獨立的 spec**。共同基準是「題目敘述 + 測資 + 驗證器 + 計分器 + 環境」，
+> 唯一變因是「模型」（模型影響整條 SDD 鏈）。詳見 `.specify/memory/constitution.md` 原則 I、III。
 
 ---
 
@@ -80,11 +85,13 @@ spec-kit-vlsi-pd/
 ## 如何進行一次模型比較實驗
 
 1. 選定題目，例如 `problems/001-partitioning/`。
-2. 以某模型在 Qwen Code 跑完整 SDD 流程，產物放入 `spec/`，實作放入 `experiments/<model>/`。
+2. 以某模型跑完整 SDD 流程；跑 `/speckit.specify` 時以
+   `SPECIFY_FEATURE_DIRECTORY=problems/<NNN-題目>/experiments/<model>/spec` 指定該模型的 SDD 目錄，
+   後續 `/speckit.plan`、`/speckit.tasks`、`/speckit.implement` 會自動沿用，產物全落在 `experiments/<model>/`。
 3. 用 `scorer/score.py` 對 `benchmark/testcase/` 批次計分：自動**重算最佳化指標**、檢查合法性、
    （選用）呼叫官方 `verify`，並輸出 Markdown/CSV（見 [`scorer/README.md`](scorer/README.md)）。
 4. scorer 報表彙整至 `docs/`；記錄三項數據：**通過/失敗**、**最佳化指標**、**時間/回合數**。
-5. 換下一個模型，重複，保持 SDD 規格一致，只變動模型。
+5. 換下一個模型，重複：**題目敘述（`reference/spec.pdf`）與評測資產保持一致**，由模型各自重新產生 spec，只變動模型。
 
 > 官方 `verify` 只判合法性、不給數值；`scorer` 補上指標數值與跨模型彙整，是做比較的核心工具。
 

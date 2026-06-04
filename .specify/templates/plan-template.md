@@ -40,7 +40,25 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+基於 `.specify/memory/constitution.md` 憲章，以下守則必須在計畫階段通過：
+
+| # | 守則 | 驗證項目 | 狀態 |
+|---|------|---------|------|
+| I | **規格先行** | spec.md 是否存在且涵蓋輸入/輸出格式、限制條件、最佳化目標、驗收標準 | ⬜ |
+| II | **驗證器即真理** | 是否以 `benchmark/verifier/verify` 為正確性依據，不依赖人工或模型自評 | ⬜ |
+| III | **公平比較** | 實作是否獨立放在 `experiments/<model>/`，不與其他模型共用中間產物 | ⬜ |
+| IV | **可重現** | 是否記錄：模型版本、SDD 產物、編譯/執行指令、測資、verifier 結果、最佳化數值、時間/回合數 | ⬜ |
+| V | **量化最佳化品質** | 是否定義明確最佳化目標並記錄數值，作為跨模型比較依據 | ⬜ |
+| VI | **研究先行，超越基準** | `research.md` 是否已：(1) 記錄 baseline 指標門檻；(2) 調研候選演算法與取捨；(3) 選定有潛力超越 baseline 的方案。未完成不得進入 tasks/implement | ⬜ |
+
+**編譯基準**: `g++ -std=c++11 -O3`；003 須連結 `reference/obj/*.o`。
+**評測三項數據**: 通過/失敗、最佳化指標、時間/開發回合數，缺一不可。
+
+**最佳化優先級**（計畫設計時必須遵守）:
+1. **結果品質優先**（最重要）— 設計決策必須優先追求**達到並超越基準線**的最佳化指標數值（cut size 更小、HPWL 更低、面積更緊湊…）；以「超越 baseline」為目標，而非僅接近。演算法選擇、資料結構、啟發式策略皆以此為第一考量。先在 `research.md` 記下 baseline 的指標數值作為要打敗的門檻。
+2. **執行效率次之** — 在結果品質相同或相近的前提下，優先選擇時間複雜度更低、記憶體使用更少、實際執行更快的方案。避免不必要的 O(n²) 嵌套迴圈或冗餘資料拷貝。
+
+> 若有守則無法通過，必須在下方 Complexity Tracking 表格說明理由並提出變通方案。
 
 ## Project Structure
 

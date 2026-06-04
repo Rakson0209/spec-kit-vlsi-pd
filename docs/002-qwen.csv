@@ -1,0 +1,6 @@
+label,problem,case,metric_name,metric,valid,verifier,self_reported,violations
+qwen,002-floorplanning,public1,wirelength,245274640.0,True,,178824140.0,
+qwen,002-floorplanning,public2,wirelength,34550821.0,True,,26431260.0,
+qwen,002-floorplanning,public3,wirelength,3082522.0,True,,1987472.0,
+qwen,002-floorplanning,public4,wirelength,117192850.0,True,,51347350.0,
+qwen,002-floorplanning,sample,wirelength,215.0,True,,170.0,

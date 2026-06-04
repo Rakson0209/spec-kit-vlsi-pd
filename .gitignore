@@ -49,10 +49,20 @@ node_modules/
 
 # ---- Qwen Code agent 資料夾：保留 spec-kit 命令定義，忽略可能寫入的憑證/session ----
 .qwen/settings.json
+.qwen/*.orig
 .qwen/*_creds*
 .qwen/oauth*
 .qwen/tmp/
 .qwen/cache/
+
+# ---- Claude Code 本機 session / 排程狀態（含機器資料） ----
+.claude/
+
+# ---- spec-kit 本機工作狀態（當前 feature 指標，非成果產物） ----
+.specify/feature.json
+
+# ---- 各模型實作的執行輸出目錄（可重新產生） ----
+problems/*/experiments/*/out/
 
 # ---- 編輯器 / 雜項 ----
 *.log

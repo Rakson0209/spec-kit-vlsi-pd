@@ -41,6 +41,9 @@ __pycache__/
 venv/
 .env
 
+# ---- scorer 編譯產物 (003 HPWL 包裝，Linux 執行檔) ----
+problems/003-global-placement/scorer/hpwl_eval
+
 # ---- Node ----
 node_modules/
 

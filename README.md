@@ -43,6 +43,7 @@ spec-kit-vlsi-pd/
 │       ├── benchmark/            # 共用測資 testcase/ + 驗證器 verifier/
 │       ├── spec/                 # SDD 產物（spec.md / plan.md / tasks.md）
 │       └── experiments/          # 各模型在此題的實作與評測結果
+├── scorer/                   # ★ 批次計分器（重算指標 + 合法性 + 彙整表格）
 ├── docs/                     # 實驗方法論、結果彙整
 └── README.md
 ```
@@ -80,9 +81,12 @@ spec-kit-vlsi-pd/
 
 1. 選定題目，例如 `problems/001-partitioning/`。
 2. 以某模型在 Qwen Code 跑完整 SDD 流程，產物放入 `spec/`，實作放入 `experiments/<model>/`。
-3. 編譯該實作，對 `benchmark/testcase/` 全部跑過，並以 `benchmark/verifier/verify` 驗證。
-4. 記錄三項數據：**通過/失敗**、**最佳化指標**、**時間/回合數**，彙整至 `docs/`。
+3. 用 `scorer/score.py` 對 `benchmark/testcase/` 批次計分：自動**重算最佳化指標**、檢查合法性、
+   （選用）呼叫官方 `verify`，並輸出 Markdown/CSV（見 [`scorer/README.md`](scorer/README.md)）。
+4. scorer 報表彙整至 `docs/`；記錄三項數據：**通過/失敗**、**最佳化指標**、**時間/回合數**。
 5. 換下一個模型，重複，保持 SDD 規格一致，只變動模型。
+
+> 官方 `verify` 只判合法性、不給數值；`scorer` 補上指標數值與跨模型彙整，是做比較的核心工具。
 
 ---
 

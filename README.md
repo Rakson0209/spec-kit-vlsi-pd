@@ -64,9 +64,12 @@ spec-kit-vlsi-pd/
 
 ---
 
-## SDD 工作流程（spec-kit + Qwen Code）
+## SDD 工作流程（spec-kit）
 
-在專案根目錄用 Qwen Code 開啟，依序使用 slash 命令：
+> **照著操作的完整手冊見 [`PROMPT.md`](PROMPT.md)** —— 含 001/002/003 三題、Claude Code 與 Qwen Code
+> 兩 agent 的逐步命令、編譯/執行/計分指令、Min 門檻速查。本節僅列命令總覽。
+
+在專案根目錄用 Claude Code 或 Qwen Code 開啟，依序使用 slash 命令：
 
 | 命令 | 作用 |
 |---|---|

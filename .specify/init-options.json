@@ -1,8 +1,8 @@
 {
-  "ai": "qwen",
+  "ai": "claude",
   "branch_numbering": "sequential",
   "here": true,
-  "integration": "qwen",
+  "integration": "claude",
   "script": "ps",
   "speckit_version": "0.9.4.dev0"
 }

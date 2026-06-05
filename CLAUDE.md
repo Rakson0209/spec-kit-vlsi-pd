@@ -2,6 +2,8 @@
 
 This file provides coding agent context for the spec-kit-vlsi-pd project.
 
+**Current Model**: `deepseek-v4-flash` (DeepSeek V4 Flash)
+
 ## Project Overview
 
 Spec-Driven Development (SDD) framework for VLSI physical design problems.
@@ -15,11 +17,12 @@ and evaluation assets, not the generated spec.
 ## Active Feature
 
 <!-- SPECKIT START -->
-**Feature**: 002 Fixed-outline Floorplanning — `claude-sonnet-4-6`
-**Spec**: `problems/002-floorplanning/experiments/claude-sonnet-4-6/spec/spec.md`
-**Plan**: `problems/002-floorplanning/experiments/claude-sonnet-4-6/spec/plan.md`
-**Algorithm**: Sequence Pair + Simulated Annealing (HPWL-only cost, AR co-optimization)
+**Feature**: 002 Fixed-outline Floorplanning — `deepseek-v4-flash`
+**Spec**: `problems/002-floorplanning/experiments/deepseek-v4-flash/spec/spec.md`
+**Plan**: `problems/002-floorplanning/experiments/deepseek-v4-flash/spec/plan.md`
+**Algorithm**: B\*-tree + Simulated Annealing with adaptive soft-module sizing
 **Target**: HPWL ≤ Min thresholds (161.6M / 21.0M / 1.86M / 63.0M for public1–4)
+**Status**: sample: ✅ OK (215); public1: HPWL 153M ✅ ≤ Min 161M but ❌ overlap with PAD modules
 <!-- SPECKIT END -->
 
 ## Key Directories

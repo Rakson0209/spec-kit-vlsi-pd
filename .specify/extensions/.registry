@@ -10,6 +10,9 @@
       "registered_commands": {
         "qwen": [
           "speckit.agent-context.update"
+        ],
+        "claude": [
+          "speckit.agent-context.update"
         ]
       },
       "registered_skills": [],

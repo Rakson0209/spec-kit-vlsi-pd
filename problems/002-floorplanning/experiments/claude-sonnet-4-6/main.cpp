@@ -393,7 +393,6 @@ int main(int argc, char** argv) {
     vector<Module> softMods(modules.begin(), modules.begin() + n_soft);
     vector<Module> fixedMods(modules.begin() + n_soft, modules.end());
 
-    // Initial square shapes
     for (auto& m : softMods) {
         int sq = max(1, (int)ceil(sqrt((double)m.min_area)));
         m.w = sq; m.h = (int)ceil((double)m.min_area / sq);
@@ -408,11 +407,8 @@ int main(int argc, char** argv) {
     long long init_hpwl = computeHPWL(allMods, nets);
 
     double lambda = 10.0 * max((double)init_hpwl, 1.0);
-    double cur_cost = computeCost(init_hpwl, ow, oh, lambda);
 
-    double T = calibrateTemp(sp, softMods, fixedMods, nets, chip_W, chip_H, lambda);
-    if (T < 1.0) T = 1e6;
-
+    SequencePair best_sp = sp;
     vector<Module> best_soft = softMods;
     long long best_hpwl = (ow == 0 && oh == 0) ? init_hpwl : LLONG_MAX;
 
@@ -420,45 +416,69 @@ int main(int argc, char** argv) {
     const double COOL = 0.92;
     int N = max(50 * n_soft * n_soft, 10000);
 
-    while (T > T_MIN && !timeUp(t_start, TIME_LIMIT)) {
-        for (int iter = 0; iter < N && !timeUp(t_start, TIME_LIMIT); iter++) {
-            int op = rng() % 4;
-
-            // Save state
-            SequencePair sp_bak = sp;
-            vector<Module> sm_bak = softMods;
-
-            UndoSP   usp{-1,0,0};
-            UndoAR   uar{-1,0,0};
-            UndoMove umv{-1,0,0};
-
-            if (op == 0)      usp = perturbSwapGP(sp);
-            else if (op == 1) usp = perturbSwapGM(sp);
-            else if (op == 2) umv = perturbRotatePair(sp);
-            else              uar = perturbResizeAR(softMods);
-
-            int new_ow, new_oh;
-            pack(sp, softMods, fixedMods, chip_W, chip_H, new_ow, new_oh);
-            auto all2 = combined(softMods, fixedMods);
-            long long new_hpwl = computeHPWL(all2, nets);
-            double new_cost = computeCost(new_hpwl, new_ow, new_oh, lambda);
-
-            double delta = new_cost - cur_cost;
-            bool accept = (delta < 0) ||
-                ((double)(rng() % 1000000) / 1000000.0 < exp(-delta / T));
-
-            if (accept) {
-                cur_cost = new_cost;
-                if (new_ow == 0 && new_oh == 0 && new_hpwl < best_hpwl) {
-                    best_hpwl = new_hpwl;
-                    best_soft = softMods;
-                }
+    int restart = 0;
+    while (!timeUp(t_start, TIME_LIMIT)) {
+        if (restart > 0) {
+            if (restart % 2 == 1 && best_hpwl < LLONG_MAX) {
+                // Intensification: start from best known solution
+                sp = best_sp;
+                softMods = best_soft;
             } else {
-                sp = sp_bak;
-                softMods = sm_bak;
+                // Diversification: random permutation from best
+                sp = best_sp;
+                shuffle(sp.pos_x.begin(), sp.pos_x.end(), rng);
+                shuffle(sp.pos_y.begin(), sp.pos_y.end(), rng);
+                for (auto& m : softMods) {
+                    int sq = max(1, (int)ceil(sqrt((double)m.min_area)));
+                    m.w = sq; m.h = (int)ceil((double)m.min_area / sq);
+                }
             }
+            pack(sp, softMods, fixedMods, chip_W, chip_H, ow, oh);
         }
-        T *= COOL;
+
+        auto allR = combined(softMods, fixedMods);
+        double cur_cost = computeCost(computeHPWL(allR, nets), ow, oh, lambda);
+
+        double T = calibrateTemp(sp, softMods, fixedMods, nets, chip_W, chip_H, lambda);
+        if (T < 1.0) T = 1e6;
+
+        while (T > T_MIN && !timeUp(t_start, TIME_LIMIT)) {
+            for (int iter = 0; iter < N && !timeUp(t_start, TIME_LIMIT); iter++) {
+                int op = rng() % 4;
+
+                SequencePair sp_bak = sp;
+                vector<Module> sm_bak = softMods;
+
+                if (op == 0)      perturbSwapGP(sp);
+                else if (op == 1) perturbSwapGM(sp);
+                else if (op == 2) perturbRotatePair(sp);
+                else              perturbResizeAR(softMods);
+
+                int new_ow, new_oh;
+                pack(sp, softMods, fixedMods, chip_W, chip_H, new_ow, new_oh);
+                auto all2 = combined(softMods, fixedMods);
+                long long new_hpwl = computeHPWL(all2, nets);
+                double new_cost = computeCost(new_hpwl, new_ow, new_oh, lambda);
+
+                double delta = new_cost - cur_cost;
+                bool accept = (delta < 0) ||
+                    ((double)(rng() % 1000000) / 1000000.0 < exp(-delta / T));
+
+                if (accept) {
+                    cur_cost = new_cost;
+                    if (new_ow == 0 && new_oh == 0 && new_hpwl < best_hpwl) {
+                        best_hpwl = new_hpwl;
+                        best_soft = softMods;
+                        best_sp = sp;
+                    }
+                } else {
+                    sp = sp_bak;
+                    softMods = sm_bak;
+                }
+            }
+            T *= COOL;
+        }
+        restart++;
     }
 
     if (best_hpwl == LLONG_MAX) {

@@ -15,9 +15,10 @@ and evaluation assets, not the generated spec.
 ## Active Feature
 
 <!-- SPECKIT START -->
-**Current Feature**: (none yet)
-新的 SDD run 由 `/speckit.specify` 建立，產物置於 `problems/<NNN>/experiments/<model>/spec/`；
-`/speckit.plan` 會自動把連結填入此區塊。
+**Current Feature**: [固定輪廓平面規劃 (Fixed-outline Floorplanning)](problems/002-floorplanning/experiments/qwen3.6-27b-autoround/spec/spec.md)
+**Model**: qwen3.6-27b-autoround
+**Plan**: [plan.md](problems/002-floorplanning/experiments/qwen3.6-27b-autoround/spec/plan.md)
+**Spec Dir**: `problems/002-floorplanning/experiments/qwen3.6-27b-autoround/spec/`
 <!-- SPECKIT END -->
 
 ## Key Directories

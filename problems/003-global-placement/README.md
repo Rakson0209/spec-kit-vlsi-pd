@@ -36,15 +36,14 @@ make                 # 產生 reference/bin/hw4，連結 ../obj/*.o 與 ../inclu
 ../bin/hw4 ../../benchmark/testcase/public1/public1.aux out.gp.pl
 ```
 
-> 注意：原始 Makefile 的 `make test` target 假設 `../testcase`、`../verifier` 在 `reference/` 下，
-> 但本 repo 已將測資與驗證器移到共用的 `benchmark/`。請改用上方手動執行路徑，
-> 或自行調整 Makefile 的相對路徑指向 `../../benchmark/`。
+> 注意：原始 Makefile 的 `make test` target 假設測資在 `reference/` 下，但本 repo 已將測資移到共用的
+> `benchmark/`，評測改用專案根的 `scorer/`（純 Python）。請改用上方手動執行路徑，或自行調整 Makefile 相對路徑。
 
 ## 驗證
 
 ```sh
-benchmark/verifier/verify <input.aux> <output.gp.pl>
-# 通過會印 [Success]，否則印 [Error] ...
+# 純 Windows：用計分器 scorer（純 Python）檢查合法性並計算 HPWL
+python scorer/score.py 003 --output-dir <模型輸出目錄>
 ```
 
 ## Baseline 指標門檻（要超越的目標）
@@ -64,4 +63,4 @@ benchmark/verifier/verify <input.aux> <output.gp.pl>
 ## 實驗
 
 每個模型的完整 SDD 鏈與實作放 [`experiments/<model>/`](experiments/)；該模型自產的 SDD 產物放 `experiments/<model>/spec/`。所有模型共用同一份題目敘述（[`reference/spec.pdf`](reference/) + `benchmark/`）。
-最佳化指標：**HPWL**（越小越好），須通過 verifier。
+最佳化指標：**HPWL**（越小越好），須通過 scorer 合法性檢查。

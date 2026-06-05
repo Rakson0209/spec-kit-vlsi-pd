@@ -18,9 +18,9 @@
 - 編譯指令：
 - 執行指令：
 
-| testcase | verifier | HPWL | 執行時間 |
+| testcase | 合法(scorer) | HPWL | 執行時間 |
 |----------|----------|------|----------|
-| public1  | Success/Error | | |
+| public1  | OK/NG | | |
 | public2  |          |      |          |
 | public3  |          |      |          |
 

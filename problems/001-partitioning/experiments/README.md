@@ -18,9 +18,9 @@
 - 編譯指令：
 - 執行指令：
 
-| testcase | verifier | cut size | 執行時間 |
+| testcase | 合法(scorer) | cut size | 執行時間 |
 |----------|----------|----------|----------|
-| sample   | Success/Error | | |
+| sample   | OK/NG | | |
 | public1  |          |          |          |
 | ...      |          |          |          |
 

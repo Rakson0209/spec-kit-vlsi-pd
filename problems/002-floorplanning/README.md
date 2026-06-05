@@ -38,8 +38,8 @@ make                 # 產生 reference/bin/hw3
 ## 驗證
 
 ```sh
-benchmark/verifier/verify <input.txt> <output.floorplan>
-# 通過會印 [Success]，否則印 [Error] ...
+# 純 Windows：用計分器 scorer（純 Python）檢查合法性並計算 wirelength
+python scorer/score.py 002 --output-dir <模型輸出目錄>
 ```
 
 ## Baseline 指標門檻（要超越的目標）
@@ -60,4 +60,4 @@ benchmark/verifier/verify <input.txt> <output.floorplan>
 ## 實驗
 
 每個模型的完整 SDD 鏈與實作放 [`experiments/<model>/`](experiments/)；該模型自產的 SDD 產物放 `experiments/<model>/spec/`。所有模型共用同一份題目敘述（[`reference/spec.pdf`](reference/) + `benchmark/`）。
-最佳化指標：**線長 / 面積**（越小越好），須在固定輪廓內且通過 verifier。
+最佳化指標：**線長 / 面積**（越小越好），須在固定輪廓內且通過 scorer 合法性檢查。

@@ -46,8 +46,8 @@ make                 # 產生 reference/bin/hw2
 ## 驗證
 
 ```sh
-benchmark/verifier/verify <input.txt> <output.out>
-# 通過會印 [Success]，否則印 [Error] ...
+# 純 Windows：用計分器 scorer（純 Python）檢查合法性並計算 cut size
+python scorer/score.py 001 --output-dir <模型輸出目錄>
 ```
 
 ## 大型測資
@@ -74,4 +74,4 @@ benchmark/verifier/verify <input.txt> <output.out>
 ## 實驗
 
 每個模型的完整 SDD 鏈與實作放 [`experiments/<model>/`](experiments/)；該模型自產的 SDD 產物放 `experiments/<model>/spec/`。所有模型共用同一份題目敘述（[`reference/spec.pdf`](reference/) + `benchmark/`）。
-最佳化指標：**cut size**（越小越好），須通過 verifier。
+最佳化指標：**cut size**（越小越好），須通過 scorer 合法性檢查。

@@ -2,9 +2,9 @@
 
 ## repo 內含
 
-- `testcase/sample.txt` — 小型範例，供快速驗證流程。
-- `verifier/verify` — 官方驗證器（Linux ELF 二進位）。
-- `verifier/README` — 驗證器用法。
+- `testcase/sample.txt` — 小型範例，供快速跑流程。
+
+> 評測與合法性檢查一律用專案根的 `scorer/`（純 Python，Windows 可跑）。
 
 ## 不在 repo 內（已由 `.gitignore` 排除）
 

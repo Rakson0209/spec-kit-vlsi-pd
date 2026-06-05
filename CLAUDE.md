@@ -15,9 +15,11 @@ and evaluation assets, not the generated spec.
 ## Active Feature
 
 <!-- SPECKIT START -->
-**Feature**: (none yet)
-新的 SDD run 由 `/speckit.specify` 建立，產物置於 `problems/<NNN>/experiments/<model>/spec/`；
-`/speckit.plan` 會自動把連結填入此區塊。
+**Feature**: 002 Fixed-outline Floorplanning — `claude-sonnet-4-6`
+**Spec**: `problems/002-floorplanning/experiments/claude-sonnet-4-6/spec/spec.md`
+**Plan**: `problems/002-floorplanning/experiments/claude-sonnet-4-6/spec/plan.md`
+**Algorithm**: Sequence Pair + Simulated Annealing (HPWL-only cost, AR co-optimization)
+**Target**: HPWL ≤ Min thresholds (161.6M / 21.0M / 1.86M / 63.0M for public1–4)
 <!-- SPECKIT END -->
 
 ## Key Directories

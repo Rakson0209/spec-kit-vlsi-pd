@@ -1,4 +1,4 @@
-# Tasks: 002 Floorplanning — claude-sonnet-4-6
+# Tasks: 002 Floorplanning — qwen3.6-27b-autoround
 
 ## R1 Fallback：直接用 reference code
 

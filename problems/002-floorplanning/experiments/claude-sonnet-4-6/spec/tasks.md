@@ -17,4 +17,4 @@
 ## 規則
 - 每次改 code 後對**所有** testcase 跑 scorer
 - 任何 case NG → 立刻修
-- 任一 case 指標比 reference 差 → 回到 reference code
+- **全部** case 都比 reference 差 → 才改用 reference code。只要有任何 case 優於 reference，就繼續用自己 code

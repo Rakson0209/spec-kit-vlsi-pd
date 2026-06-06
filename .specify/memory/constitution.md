@@ -3,7 +3,7 @@
 ## 硬規則（違反即失敗）
 
 ### R1. Baseline Fallback — 最重要
-**先自己寫 code。跑 scorer。若任何 testcase 的指標比 `reference/src/` 差 → 立刻放棄自己的 code，複製 `reference/src/*.cpp` 到 `experiments/<model>/`，在此基礎上優化。**
+**先自己寫 code。跑 scorer。若全部 testcase 的指標都比 `reference/src/` 差 → 放棄自寫 code，複製 `reference/src/*.cpp` 到 `experiments/<model>/`，在此基礎上優化。只要有任何 case 優於 reference，就繼續用自己的 code。**
 
 不允許在自寫 code 上花超過一輪迭代。baseline 是全 case 的及格線。
 

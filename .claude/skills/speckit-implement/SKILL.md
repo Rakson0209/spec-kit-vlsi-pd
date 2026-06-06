@@ -21,8 +21,9 @@ metadata:
 ### Step 2: 判定（R1 — 憲章最高原則）
 | 結果 | 行動 |
 |------|------|
-| 全部合法 + 指標 ≤ baseline | → Step 4（優化） |
-| 任何 case 指標 > baseline 或 NG | → **立刻 Step 3**，不允許再改自己的 code |
+| 全部合法 + 全部指標 ≤ baseline | → Step 4（優化） |
+| 全部 case 指標都 > baseline | → **Step 3**（複製 reference） |
+| 部分 case 優於 baseline、部分差 | → **繼續用自己的 code 優化**，不許 fallback |
 
 ### Step 3: Fallback — 複製 reference/src/
 ```powershell

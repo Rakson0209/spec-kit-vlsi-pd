@@ -7,7 +7,7 @@ Constitution: `.specify/memory/constitution.md`
 
 ## 核心規則（最重要）
 
-**R1 Baseline Fallback**：先自寫 code → 跑 scorer → 若任何 case 指標比 `reference/src/` 差 → 立刻複製 reference code 並在它基礎上優化。不許在自寫 code 上耗超過一輪。
+**R1 Baseline Fallback**：先自寫 code → 跑 scorer → 若**全部** case 都比 `reference/src/` 差 → 複製 reference 並在其上優化。只要有任何 case 優於 reference，就繼續用自己的 code。
 
 **R2 Boost + 平行優先**：編譯一律 `g++ -std=c++20 -O3 -fopenmp -pthread -I tools/boost`。優先使用 `boost::graph`、`boost::geometry`、OpenMP 平行化。
 
@@ -31,3 +31,7 @@ python scorer/score.py <problem-num> --output-dir <out-dir> --label <model>
 `/speckit.specify` → `/speckit.plan` → `/speckit.tasks` → `/speckit.implement`
 
 Skill 檔案：`.claude/skills/speckit-*/SKILL.md`
+
+<!-- SPECKIT START -->
+Current plan: problems/001-partitioning/experiments/claude-opus-4-8/spec/plan.md
+<!-- SPECKIT END -->

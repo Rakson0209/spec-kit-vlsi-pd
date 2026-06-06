@@ -1,4 +1,4 @@
-# Specification Quality Checklist: Fixed-outline Floorplanning Optimizer
+﻿# Specification Quality Checklist: Fixed-outline Floorplanning Optimizer
 
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-06-05
@@ -34,5 +34,5 @@
 - 規格刻意以「驗收標準＝verifier `[Success]` + scorer HPWL ≤ Min」描述目標，
   保持技術中立（未指定演算法）。演算法選型留待 `/speckit.plan` 的 `research.md`（憲章原則 VI）。
 - SC-002 與 SC-003 分層：以「全部達 Min」為目標，「優於 Reference 且不零分」為保底下限。
-- `g++ -std=c++11 -O3` 出現於 Assumptions/SC-005，屬共同基準環境設定（憲章原則 III/IV 要求記錄），
+- `g++ -std=c++20 -O3` 出現於 Assumptions/SC-005，屬共同基準環境設定（憲章原則 III/IV 要求記錄），
   非演算法實作細節，故不視為違反「technology-agnostic」。

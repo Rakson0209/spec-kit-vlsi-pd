@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 Sync Impact Report (v0.3.0 → v0.4.0)
 =====================================
 Version change: 0.3.0 → 0.4.0 (MINOR: 新增原則 VII 合法性門檻與完成定義；評測判定對齊 scorer)
@@ -85,7 +85,11 @@ SDD 產物放在該模型自己的 `experiments/<model>/spec/`。模型間不得
 
 - baseline（人類參考解）位於各題 `reference/`，作為品質對照基準線。
 - 共用資產：`benchmark/testcase/`（測資）；合法性與計分一律用專案根的 `scorer/`（純 Python，Windows 可跑）。
-- 編譯以 `g++ -std=c++11 -O3` 為基準（純 Windows 用 WinLibs g++；自編 exe 須在允許執行的目錄下跑）。
+- 編譯以 `g++ -std=c++20 -O3` 為基準（專案內建 portable C++ 環境 `tools\mingw64\`，WinLibs GCC 16.1.0，解壓縮後執行 `setup-env.bat` 即可使用；自編 exe 須在允許執行的目錄下跑）。
+- **加速選項**（內建編譯器均已支援）：
+  - **OpenMP**：`-fopenmp` — 平行化迴圈與多起點搜尋（如 SA multi-restart），在 multi-core CPU 上線性加速
+  - **pthread / std::thread**：`-pthread` — 多執行緒同時搜尋不同解空間、平行驗證約束
+  - **Boost C++ Libraries**：強烈推薦（`boost::graph` 用於 partitioning、`boost::geometry` 用於 floorplanning），需自行下載至 `tools/boost/` 並以 `-I tools/boost` 引用
 - 評測三項數據缺一不可：合法/不合法（全 case）、最佳化指標、時間或開發回合數。
 
 ## 實驗工作流程
@@ -95,10 +99,20 @@ SDD 產物放在該模型自己的 `experiments/<model>/spec/`。模型間不得
    會自動沿用同一目錄（選用 `/speckit.clarify`、`/speckit.analyze`）。
 2. 每個模型的 SDD 產物入 `experiments/<model>/spec/`，實作入 `experiments/<model>/`。
    一次跑完一個模型的完整鏈再換下一個（`.specify/feature.json` 一次僅記一個 active 目錄）。
-3. `/speckit.implement` 須對全部 `benchmark/testcase/` 以 `scorer/` 驗證合法性與計分，
-   **全部合法**方可結束（原則 VII）；再評估是否 ≤ Min（原則 VI）。
-4. 數據彙整入 `docs/`，更新比較表。
 
+3. **Baseline 先行驗證（原則 VIII）**：在開始任何演算法優化之前，**必須先複製 `reference/src/` 中的
+   參考解程式碼**到 `experiments/<model>/`，編譯後對**所有 testcase** 執行並以 `scorer/` 驗證：
+   - 全部 testcase 合法（OK）→ 記錄 baseline 指標數值作為優化起點
+   - 任一 testcase 不合法（NG）→ **先修正輸入/輸出路徑或格式問題**，直到全部合法
+   ⚠️ 未通過 baseline 驗證不得開始優化（避免陷入單一 case 優化而其他 case 根本無法通過的困境）。
+
+4. **逐步優化，全 case 守門**：baseline 全部合法後，逐步替換演算法（SA、B*-tree、multi-restart 等），
+   **每次改動後立即對所有 testcase 重新驗證合法性**。若某次改動導致其他 case 變 NG，
+   優先修正合法性再繼續優化。**禁止只盯著一個 case 優化到極致而忽略其他 case**。
+
+5. `/speckit.implement` 須對全部 `benchmark/testcase/` 以 `scorer/` 驗證合法性與計分，
+   **全部合法**方可結束（原則 VII）；再評估是否 ≤ Min（原則 VI）。
+6. 數據彙整入 `docs/`，更新比較表。
 ## Governance
 
 本憲章凌駕個別實驗的便宜行事。任何偏離（例如為某模型放寬規格、跳過 `scorer/` 合法性檢查、

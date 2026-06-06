@@ -1,4 +1,4 @@
-# 002 — 固定輪廓平面規劃 (Fixed-outline Floorplanning)
+﻿# 002 — 固定輪廓平面規劃 (Fixed-outline Floorplanning)
 
 > 清大 CS6135 VLSI Physical Design Automation, HW3。完整題目見 [`reference/spec.pdf`](reference/spec.pdf)。
 
@@ -27,6 +27,8 @@ Net <moduleA> <moduleB> <weight>
 各模組最終座標與尺寸（詳見 spec.pdf）。
 
 ## 編譯與執行 baseline
+
+**環境**：專案內建 portable g++（`tools\mingw64\`），先執行 `tools\mingw64\setup-env.bat` 載入。
 
 ```sh
 cd reference/src

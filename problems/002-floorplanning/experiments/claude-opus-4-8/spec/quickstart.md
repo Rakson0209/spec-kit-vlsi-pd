@@ -1,10 +1,10 @@
-# Quickstart: 驗證 Fixed-outline Floorplanning（claude-opus-4-8）
+﻿# Quickstart: 驗證 Fixed-outline Floorplanning（claude-opus-4-8）
 
 > 端到端驗證指南：build → run → verify → score。實作細節見 plan/research/data-model，本檔只證明能跑通。
 
 ## 前置
 
-- C++11 編譯器（`g++ -std=c++11 -O3`）。
+- C++20 編譯器（`g++ -std=c++20 -O3`）。
 - Windows 計分：Python + `scorer/score.py`。
 - Linux 驗證：`benchmark/verifier/verify`（如遇權限：`chmod +x verify`）。
 - 工作目錄：`problems/002-floorplanning/experiments/claude-opus-4-8/`。
@@ -13,7 +13,7 @@
 
 ```sh
 cd problems/002-floorplanning/experiments/claude-opus-4-8
-g++ -std=c++11 -O3 -o hw3 main.cpp
+g++ -std=c++20 -O3 -o hw3 main.cpp
 # 或： make
 ```
 預期：產生 `hw3`，無警告錯誤。

@@ -1,4 +1,4 @@
-# Quickstart Validation Guide
+﻿# Quickstart Validation Guide
 
 **Feature**: Fixed-outline Floorplanning Optimizer
 **Implementation target**: `problems/002-floorplanning/experiments/claude-sonnet-4-6/`
@@ -8,7 +8,7 @@
 
 ## Prerequisites
 
-- **Compiler**: `g++` with C++11 support (`g++ -std=c++11 -O3`)
+- **Compiler**: `g++` with C++20 support (`g++ -std=c++20 -O3`)
 - **Python 3** (for scorer)
 - **Linux** (for official verifier binary); Windows-native scorer works on all platforms
 
@@ -18,7 +18,7 @@
 
 ```sh
 cd problems/002-floorplanning/experiments/claude-sonnet-4-6
-g++ -std=c++11 -O3 -o hw3 main.cpp
+g++ -std=c++20 -O3 -o hw3 main.cpp
 ```
 
 Expected: binary `hw3` created with no warnings.

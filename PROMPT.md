@@ -1,4 +1,4 @@
-# PROMPT.md — 實驗操作手冊（Claude Code / Qwen Code 通用，純 Windows）
+﻿# PROMPT.md — 實驗操作手冊（Claude Code / Qwen Code 通用，純 Windows）
 
 照著本檔下指令，就能對 **001 / 002 / 003** 三題、用任一模型跑完整 SDD 流程並計分。
 兩個 agent 用的 slash 命令**完全相同**（`/speckit.*`），差別只在「怎麼啟動」與「選哪個模型」。
@@ -32,6 +32,22 @@
   - 任一 testcase 不合法（scorer 顯示 **NG**）→ **定位原因、修正、重跑**，反覆直到全部 **OK**，才能結束。
   - **不准「能產生輸出檔」就當完成**；不合法的低指標一律視為失敗（0 分），不納入比較。
   - 先做到「全 case 合法」(gate)，**再**追求指標 ≤ Min (objective)。
+
+### 階段 0：Baseline 先行驗證（必須先做）
+
+在開始任何演算法優化前，先複製 `reference/src/` 的參考解，確認所有 testcase 都能通過：
+
+```powershell
+# 複製 reference 程式碼到實驗目錄
+Copy-Item -Recurse reference/src/* experiments/<model>/
+
+# 編譯
+. .\tools\mingw64\setup-env.ps1
+g++ -std=c++20 -O3 -o hw3 main.cpp
+
+# 對所有 testcase 執行並用 scorer 驗證
+# 全部合法（OK）後再開始優化，避免卡在單一 case
+```
 
 > 下 `/speckit.implement` 時，建議在指令尾巴釘一句：
 > 「依憲章原則 VII：先用 scorer 對**所有** testcase 驗證合法性，**任一 NG 就修正並重跑直到全 OK 才算完成**；全合法後再追求 ≤ Min。有任何 NG 不准結束。」
@@ -85,10 +101,29 @@ qwen
 
 ## 3. 編譯 → 執行 → 計分（PowerShell，Windows 原生）
 
-> **編譯器**：WinLibs **g++ 16.1.0** 已裝。新開的 PowerShell 直接有 `g++`；若沒有，先重載 PATH：
+> **編譯器**：專案已內建 **portable C++ 環境**（WinLibs GCC 16.1.0 + MinGW-w64 14.0.0 UCRT），
+> 放在 `tools\mingw64\`，解壓縮後無需安裝。
+>
+> **每次開新 PowerShell 先載入環境**：
 > ```powershell
-> $env:PATH = [Environment]::GetEnvironmentVariable("PATH","Machine")+";"+[Environment]::GetEnvironmentVariable("PATH","User")
+> . .\tools\mingw64\setup-env.ps1
 > ```
+> （或執行 `tools\mingw64\setup-env.bat` 開新視窗）
+
+> ****加速編譯選項**（全部內建支援，無需額外安裝）：
+> ```powershell
+> # 基礎編譯
+> g++ -std=c++20 -O3 -o $exe *.cpp
+> # OpenMP 平行化（推薦用於 SA 多起點、平行 cost eval）
+> g++ -std=c++20 -O3 -fopenmp -o $exe *.cpp
+> # 多執行緒（pthread / std::thread）
+> g++ -std=c++20 -O3 -pthread -o $exe *.cpp
+> # 全開加速
+> g++ -std=c++20 -O3 -fopenmp -pthread -o $exe *.cpp
+> # 使用 Boost（需先下載至 tools/boost/）
+> g++ -std=c++20 -O3 -I tools/boost -o $exe *.cpp
+> ```
+>
 > **★ 執行限制**：本機安全政策會封鎖一般路徑下自編 exe 的執行（`Access is denied`），
 > **唯獨 `D:\FSecret\` 允許執行**。因此 **exe 一律編到 `D:\FSecret\`** 再從那裡執行；輸出資料檔不受限。
 > （此為本機限制，下方用 `$exeDir` 變數，依你環境調整目錄。）
@@ -106,7 +141,7 @@ $exeDir = "D:\FSecret"          # ← 本機允許執行自編 exe 的目錄
 ```powershell
 $d = "problems\001-partitioning\experiments\$model"
 $exe = "$exeDir\hw_001_$model.exe"
-g++ -std=c++17 -O3 -o $exe (Get-ChildItem -Recurse "$d" -Filter *.cpp | % FullName)
+g++ -std=c++20 -O3 -o $exe (Get-ChildItem -Recurse "$d" -Filter *.cpp | % FullName)
 New-Item -ItemType Directory -Force "$d\out" | Out-Null
 foreach ($t in 'public1','public2','public3','public4','public5','public6') {
   $ms = Measure-Command { & $exe "problems\001-partitioning\benchmark\testcase\$t.txt" "$d\out\$t.out" }
@@ -120,7 +155,7 @@ python scorer\score.py 001 --output-dir "$d\out" --label $model --md "docs\001-$
 ```powershell
 $d = "problems\002-floorplanning\experiments\$model"
 $exe = "$exeDir\hw_002_$model.exe"
-g++ -std=c++17 -O3 -o $exe (Get-ChildItem -Recurse "$d" -Filter *.cpp | % FullName)
+g++ -std=c++20 -O3 -o $exe (Get-ChildItem -Recurse "$d" -Filter *.cpp | % FullName)
 New-Item -ItemType Directory -Force "$d\out" | Out-Null
 foreach ($t in 'public1','public2','public3','public4') {
   $ms = Measure-Command { & $exe "problems\002-floorplanning\benchmark\testcase\$t.txt" "$d\out\$t.floorplan" }
@@ -133,7 +168,7 @@ python scorer\score.py 002 --output-dir "$d\out" --label $model --md "docs\002-$
 ```powershell
 $d = "problems\003-global-placement\experiments\$model"
 $exe = "$exeDir\hw_003_$model.exe"
-g++ -std=c++17 -O3 -o $exe (Get-ChildItem -Recurse "$d" -Filter *.cpp | % FullName)
+g++ -std=c++20 -O3 -o $exe (Get-ChildItem -Recurse "$d" -Filter *.cpp | % FullName)
 New-Item -ItemType Directory -Force "$d\out" | Out-Null
 foreach ($t in 'public1','public2','public3') {
   $ms = Measure-Command { & $exe "problems\003-global-placement\benchmark\testcase\$t\$t.aux" "$d\out\$t.gp.pl" }

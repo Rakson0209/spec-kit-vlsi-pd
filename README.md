@@ -1,4 +1,4 @@
-# spec-kit-vlsi-pd
+﻿# spec-kit-vlsi-pd
 
 以 **Spec-Driven Development (SDD)** 流程，搭配 [GitHub spec-kit](https://github.com/github/spec-kit) 與 [Qwen Code](https://github.com/QwenLM/qwen-code)，
 重新實作 **VLSI 實體設計自動化 (Physical Design Automation)** 的經典演算法題目，
@@ -117,6 +117,9 @@ spec-kit-vlsi-pd/
 - **Qwen Code** CLI（SDD agent）
 - **spec-kit**（`specify` CLI，已初始化）
 - **計分器 `scorer/`**：純 Python 3.7+，**Windows 原生可跑**，無需編譯器或 Linux（見 [`scorer/README.md`](scorer/README.md)）
+- **Portable C++ 編譯環境**：專案已內建在 `tools\mingw64\`（WinLibs GCC 16.1.0 + MinGW-w64 14.0.0 UCRT），
+  解壓縮後執行 `tools\mingw64\setup-env.bat` 或 `. .\tools\mingw64\setup-env.ps1` 即可使用，
+  **無需另外安裝 g++**。其他電腦解壓縮後同樣適用。
 
 > **平台註記**：`baseline`（001 需 Boost、003 為 Linux 預編譯 `obj`）多屬 Linux 工具，純 Windows 未必能執行/連結。
 > 因此在純 Windows 下，合法性與指標計算一律用 `scorer/`（純 Python，已涵蓋各題主要規則）。

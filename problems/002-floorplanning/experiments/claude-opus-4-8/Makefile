@@ -1,5 +1,5 @@
-CXX      = g++
-CXXFLAGS = -std=c++11 -O3
+﻿CXX      = g++
+CXXFLAGS = -std=c++20 -O3
 TARGET   = hw3
 
 all: $(TARGET)

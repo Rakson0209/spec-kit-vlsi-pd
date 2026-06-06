@@ -1,4 +1,4 @@
-# 001 — 多技術晶粒切割 (Die Partitioning)
+﻿# 001 — 多技術晶粒切割 (Die Partitioning)
 
 > 清大 CS6135 VLSI Physical Design Automation, HW2。完整題目見 [`reference/spec.pdf`](reference/spec.pdf)。
 
@@ -35,6 +35,7 @@ Cell <CellName>
 ## 編譯與執行 baseline
 
 > 需要 Boost C++ library（`-I /usr/local/include/boost/`）。
+> **環境**：專案內建 portable g++（`tools\mingw64\`），先執行 `tools\mingw64\setup-env.bat` 載入。
 
 ```sh
 cd reference/src

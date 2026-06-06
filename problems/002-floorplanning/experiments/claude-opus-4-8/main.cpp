@@ -1,11 +1,11 @@
-// Fixed-outline Floorplanning Optimizer — claude-opus-4-8
+﻿// Fixed-outline Floorplanning Optimizer — claude-opus-4-8
 // 演算法：線長導向建構式擺放 + 無網格 HPWL-only 模擬退火（O(N^2) 重疊檢查）。
 //   - cost 僅含加權 HPWL（固定輪廓下面積與目標無關，丟棄面積項）。
 //   - 模組以絕對座標矩形表示；N(soft)<=28，每步重疊檢查 O(N^2) 近免費，可跑大量迭代。
 //   - 合法性常數與 HPWL 定義對齊官方 verifier / scorer：
 //       outline: 0<=x,0<=y,x+w<=W,y+h<=H；overlap: 矩形交集>0（觸邊不算）；
 //       面積: w*h>=area（下限）；長寬比: h/w in [0.5,2]；中心: (x+w/2,y+h/2) 整數除法。
-// 編譯：g++ -std=c++11 -O3 -o hw3 main.cpp
+// 編譯：g++ -std=c++20 -O3 -o hw3 main.cpp
 // 執行：hw3 <input.txt> <output.floorplan>   （可選 argv[3]=時間上限秒數，預設 580）
 #include <iostream>
 #include <fstream>

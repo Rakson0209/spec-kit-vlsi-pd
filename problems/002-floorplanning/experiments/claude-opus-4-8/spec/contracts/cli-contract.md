@@ -1,4 +1,4 @@
-# Contract: CLI / 執行介面（claude-opus-4-8）
+﻿# Contract: CLI / 執行介面（claude-opus-4-8）
 
 ## 命令列
 
@@ -20,7 +20,7 @@ hw3 <input.txt> <output.floorplan>
 ## 編譯
 
 ```
-g++ -std=c++11 -O3 -o hw3 main.cpp
+g++ -std=c++20 -O3 -o hw3 main.cpp
 ```
 
 ## 驗證 / 計分契約

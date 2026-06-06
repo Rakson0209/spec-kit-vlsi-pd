@@ -1,4 +1,4 @@
-# Feature Specification: Fixed-outline Floorplanning Optimizer
+﻿# Feature Specification: Fixed-outline Floorplanning Optimizer
 
 **Feature Branch**: `002-fixed-outline-floorplanning`
 
@@ -114,13 +114,13 @@ fixed module 維持輸入給定的座標與尺寸不被更動，每個 soft modu
 - **SC-002（超越 Min）**: public1~4 各 testcase 的加權 HPWL ≤ 對應 Min 門檻（見 User Story 2 表格），達成 4 份全部超越已知最佳值。
 - **SC-003（超越 Reference 下限）**: 若未能全部達 Min，各 testcase 的 HPWL 至少 < Reference 值且 < Max 門檻，即優於人類參考解且不零分。
 - **SC-004（時間）**: 所有 testcase 執行時間 ≤ 600 秒；其中 public2/3/4 目標 ≤ 120 秒，保留最佳化迭代空間。
-- **SC-005（可重現）**: 在相同硬體與編譯指令（`g++ -std=c++11 -O3`）下，重複執行同一 testcase 的 HPWL 差異 ≤ 5%；若使用隨機演算法須記錄 seed。
+- **SC-005（可重現）**: 在相同硬體與編譯指令（`g++ -std=c++20 -O3`）下，重複執行同一 testcase 的 HPWL 差異 ≤ 5%；若使用隨機演算法須記錄 seed。
 
 ---
 
 ## Assumptions
 
-- 程式以 C++11（`g++ -std=c++11 -O3`）編譯，在 Windows 原生環境與 Linux 均可編譯執行。
+- 程式以 C++20（`g++ -std=c++20 -O3`）編譯，在 Windows 原生環境與 Linux 均可編譯執行。
 - 輸入檔格式保證合法，無需處理格式錯誤、缺漏欄位或未知模組名稱。
 - Fixed modules 本身互不重疊且皆落在輪廓內（題目保證），程式無需驗證輸入合法性。
 - HPWL 的代表點與精確計算方式以官方 verifier / `scorer/` 為準；本規格的 FR-006 為其文字描述。

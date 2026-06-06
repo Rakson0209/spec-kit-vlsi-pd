@@ -1,4 +1,4 @@
-# Tasks: Fixed-outline Floorplanning Optimizer (claude-sonnet-4-6)
+﻿# Tasks: Fixed-outline Floorplanning Optimizer (claude-sonnet-4-6)
 
 **Input**: Design documents from `problems/002-floorplanning/experiments/claude-sonnet-4-6/spec/`
 
@@ -21,7 +21,7 @@
 **Purpose**: Create the project skeleton and verify the build pipeline.
 
 - [x] T001 Create `problems/002-floorplanning/experiments/claude-sonnet-4-6/main.cpp` with `main(int argc, char** argv)` that accepts two CLI arguments (input file, output file) and exits gracefully if arguments are missing
-- [x] T002 Verify compilation: run `g++ -std=c++11 -O3 -o hw3 main.cpp` from `problems/002-floorplanning/experiments/claude-sonnet-4-6/`; binary must produce without warnings
+- [x] T002 Verify compilation: run `g++ -std=c++20 -O3 -o hw3 main.cpp` from `problems/002-floorplanning/experiments/claude-sonnet-4-6/`; binary must produce without warnings
 
 **Checkpoint**: Binary `hw3` compiles and runs with `./hw3 --help` or prints usage message.
 

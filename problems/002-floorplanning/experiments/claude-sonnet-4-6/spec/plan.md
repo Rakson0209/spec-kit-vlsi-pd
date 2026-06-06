@@ -1,4 +1,4 @@
-# Implementation Plan: Fixed-outline Floorplanning Optimizer
+﻿# Implementation Plan: Fixed-outline Floorplanning Optimizer
 
 **Branch**: `main` | **Date**: 2026-06-05 | **Spec**: [spec.md](spec.md)
 
@@ -10,13 +10,13 @@
 
 ## Summary
 
-Build a C++11 command-line optimizer for fixed-outline floorplanning that minimizes weighted HPWL using **Sequence Pair + Simulated Annealing** with soft module aspect ratio co-optimization. The reference implementation's key weakness is its O(chip_area) pixel-grid representation; our compact geometric representation enables 10,000–50,000× more SA moves in the same 580-second budget, targeting HPWL ≤ Min thresholds.
+Build a C++20 command-line optimizer for fixed-outline floorplanning that minimizes weighted HPWL using **Sequence Pair + Simulated Annealing** with soft module aspect ratio co-optimization. The reference implementation's key weakness is its O(chip_area) pixel-grid representation; our compact geometric representation enables 10,000–50,000× more SA moves in the same 580-second budget, targeting HPWL ≤ Min thresholds.
 
 ---
 
 ## Technical Context
 
-**Language/Version**: C++11 (`g++ -std=c++11 -O3`)
+**Language/Version**: C++20 (`g++ -std=c++20 -O3`)
 
 **Primary Dependencies**: C++ STL only (`<vector>`, `<algorithm>`, `<cmath>`, `<unordered_map>`, `<ctime>`, `<random>`)
 
@@ -24,7 +24,7 @@ Build a C++11 command-line optimizer for fixed-outline floorplanning that minimi
 
 **Testing**: Manual: `benchmark/verifier/verify` + `scorer/score.py`
 
-**Target Platform**: Windows (primary dev) and Linux (for verifier); C++11 portable
+**Target Platform**: Windows (primary dev) and Linux (for verifier); C++20 portable
 
 **Project Type**: CLI binary (`hw3 <input.txt> <output.floorplan>`)
 
@@ -47,7 +47,7 @@ Build a C++11 command-line optimizer for fixed-outline floorplanning that minimi
 | V | **量化最佳化品質** | 明確 HPWL 目標數值，跨模型比較 | ✅ |
 | VI | **研究先行，超越基準** | research.md 已記錄 baseline 門檻、候選演算法調研、選定超越 baseline 方案 | ✅ |
 
-**編譯基準**: `g++ -std=c++11 -O3`
+**編譯基準**: `g++ -std=c++20 -O3`
 **評測三項數據**: 通過/失敗、HPWL、執行時間
 
 ---

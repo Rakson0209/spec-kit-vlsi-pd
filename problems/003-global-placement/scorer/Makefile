@@ -1,5 +1,5 @@
-CXX      := g++
-CXXFLAGS := -std=c++11 -O3 -Wall -I../reference/include
+﻿CXX      := g++
+CXXFLAGS := -std=c++20 -O3 -Wall -I../reference/include
 EXT_OBJS := $(wildcard ../reference/obj/*.o)
 LDFLAGS  := -no-pie
 

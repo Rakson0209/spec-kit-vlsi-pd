@@ -1,4 +1,4 @@
-# Research: Fixed-outline Floorplanning Optimizer
+﻿# Research: Fixed-outline Floorplanning Optimizer
 
 **Phase 0 — Research-First (Constitution Principle VI)**
 **Date**: 2026-06-05
@@ -131,7 +131,7 @@ Our approach with a compact geometric representation can achieve **100,000–1,0
 3. **Fixed outline**: Enforce as a combination of hard constraint + penalty. If packed W or H exceeds chip bounds, apply large penalty; additionally try soft module AR adjustments to shrink.
 4. **Soft module flexibility**: At packing time, choose (w,h) from the feasible set `{(w,h) : w×h ≥ area, 0.5 ≤ h/w ≤ 2}` to minimize HPWL contribution to adjacent nets. This is a 1D optimization (over aspect ratio r = h/w ∈ [0.5, 2]) for each module.
 5. **Pure HPWL cost**: Use `cost = HPWL` only (α=0, β=1). Area is managed by the feasibility constraint, not the cost function.
-6. **Implementation feasibility**: Can be implemented in ~300–400 lines of well-tested C++11, achievable in one SDD cycle.
+6. **Implementation feasibility**: Can be implemented in ~300–400 lines of well-tested C++20, achievable in one SDD cycle.
 
 ### 4.2 Why Not B\*-tree
 

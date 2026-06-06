@@ -1,4 +1,4 @@
----
+﻿---
 description: "Task list for Fixed-outline Floorplanning (claude-opus-4-8)"
 ---
 
@@ -29,7 +29,7 @@ description: "Task list for Fixed-outline Floorplanning (claude-opus-4-8)"
 
 **Purpose**: 建立建置骨架與檔案結構
 
-- [x] T001 建立 `problems/002-floorplanning/experiments/claude-opus-4-8/Makefile`，內容為 `g++ -std=c++11 -O3 -o hw3 main.cpp`（target：`all`、`clean`）
+- [x] T001 建立 `problems/002-floorplanning/experiments/claude-opus-4-8/Makefile`，內容為 `g++ -std=c++20 -O3 -o hw3 main.cpp`（target：`all`、`clean`）
 - [x] T002 [P] 建立 `problems/002-floorplanning/experiments/claude-opus-4-8/RESULT.md` 骨架（依 `experiments/README.md` 模板：模型版本、編譯/執行指令、結果表、seed、回合數欄位待填）
 - [x] T003 建立 `problems/002-floorplanning/experiments/claude-opus-4-8/main.cpp` 骨架：`#include`、`using namespace std`、`int main(int argc,char**argv)` 讀 `argv[1]`/`argv[2]` 並呼叫 `solve(input,output)` 空殼
 
@@ -115,7 +115,7 @@ description: "Task list for Fixed-outline Floorplanning (claude-opus-4-8)"
 - [x] T025 對 sample + public1~4 完整重跑：`verify`（全 `[Success]`）+ `scorer/score.py`（HPWL）+ 計時，作為最終數據
 - [x] T026 填寫 `problems/002-floorplanning/experiments/claude-opus-4-8/RESULT.md`：模型版本、編譯/執行指令、各測資 verifier 結果 / HPWL / 時間、對照 Min/Reference/Max、seed、開發回合數（憲章原則 IV）
 - [x] T027 [P] 依 `spec/quickstart.md` 走一遍端到端驗證流程，確認指令與預期輸出一致
-- [x] T028 `main.cpp` 程式碼整理：函式分區註解、移除暫用程式碼、確認 `g++ -std=c++11 -O3` 無警告
+- [x] T028 `main.cpp` 程式碼整理：函式分區註解、移除暫用程式碼、確認 `g++ -std=c++20 -O3` 無警告
 
 ---
 

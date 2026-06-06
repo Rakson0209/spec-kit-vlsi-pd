@@ -1,4 +1,4 @@
-# Implementation Plan: Fixed-outline Floorplanning Optimizer
+﻿# Implementation Plan: Fixed-outline Floorplanning Optimizer
 
 **Branch**: `main`（feature dir：`experiments/claude-opus-4-8/`）| **Date**: 2026-06-05 | **Spec**: [spec.md](./spec.md)
 
@@ -16,7 +16,7 @@ Min 門檻（161.6M / 21.0M / 1.86M / 63.0M）。詳見 [research.md](./research
 
 ## Technical Context
 
-**Language/Version**: C++11（`g++ -std=c++11 -O3`）
+**Language/Version**: C++20（`g++ -std=c++20 -O3`）
 
 **Primary Dependencies**: 僅 C++ 標準函式庫（無第三方）；不連結外部 lib（003 才需 reference/obj）
 
@@ -55,7 +55,7 @@ HPWL 目標：4 份 public 全部 ≤ Min 門檻（見 research.md 門檻表）�
 | V | **量化最佳化品質** | 目標為加權 HPWL 數值，對照 Min/Reference/Max 門檻 | ✅ |
 | VI | **研究先行，超越基準** | research.md 已：(1) 記錄 Min 門檻；(2) 調研候選演算法與取捨；(3) 選定有潛力超越 baseline 的方案 | ✅ |
 
-**編譯基準**: `g++ -std=c++11 -O3`（本題不需連結 `reference/obj`）。
+**編譯基準**: `g++ -std=c++20 -O3`（本題不需連結 `reference/obj`）。
 **評測三項數據**: verifier 通過/失敗、HPWL 數值、執行時間/回合數，缺一不可。
 
 **最佳化優先級遵守說明**:
@@ -88,7 +88,7 @@ problems/002-floorplanning/experiments/claude-opus-4-8/spec/
 ```text
 problems/002-floorplanning/experiments/claude-opus-4-8/
 ├── main.cpp             # 單檔實作（parser → global place → legalize → SA → output）
-├── Makefile             # g++ -std=c++11 -O3 -o hw3 main.cpp
+├── Makefile             # g++ -std=c++20 -O3 -o hw3 main.cpp
 ├── RESULT.md            # 評測紀錄（implement 後填）
 └── *.floorplan          # 各測資輸出（implement 後產生）
 ```

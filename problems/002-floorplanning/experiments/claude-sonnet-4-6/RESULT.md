@@ -1,8 +1,8 @@
-# Result: Fixed-outline Floorplanning — claude-sonnet-4-6
+﻿# Result: Fixed-outline Floorplanning — claude-sonnet-4-6
 
 **Model**: claude-sonnet-4-6
 **Algorithm**: Sequence Pair + Simulated Annealing + Multi-restart (intensification/diversification)
-**Compile**: `g++ -std=c++11 -O3 -o hw3 main.cpp`
+**Compile**: `g++ -std=c++20 -O3 -o hw3 main.cpp`（專案內建 portable C++ 環境 `tools\mingw64\`）
 **Run**: `./hw3 <input.txt> <output.floorplan>`
 **Date**: 2026-06-05
 

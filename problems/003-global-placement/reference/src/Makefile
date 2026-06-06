@@ -1,5 +1,5 @@
-CXX      := g++
-CXXFLAGS := -std=c++11 -O3 -Wall -Wextra -I../include
+﻿CXX      := g++
+CXXFLAGS := -std=c++20 -O3 -Wall -Wextra -I../include
 EXT_OBJS := $(wildcard ../obj/*.o)
 EXEC     := ../bin/hw4
 SRCS     := ExampleFunction.cpp GlobalPlacer.cpp main.cpp

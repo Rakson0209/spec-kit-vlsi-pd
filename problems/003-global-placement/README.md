@@ -1,4 +1,4 @@
-# 003 — 全域佈局 (Global Placement)
+﻿# 003 — 全域佈局 (Global Placement)
 
 > 清大 CS6135 VLSI Physical Design Automation, HW4。完整題目見 [`reference/spec.pdf`](reference/spec.pdf)。
 
@@ -28,6 +28,7 @@ benchmark/testcase/public1/
 
 > `reference/obj/*.o` 是**題目提供的預編譯函式庫**（無原始碼，Makefile 以 `wildcard ../obj/*.o` 連結），
 > 編譯必需，請勿刪除。需 `reference/include/` 下的標頭檔。
+> **環境**：專案內建 portable g++（`tools\mingw64\`），先執行 `tools\mingw64\setup-env.bat` 載入。
 
 ```sh
 cd reference/src

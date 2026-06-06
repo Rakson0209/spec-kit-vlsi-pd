@@ -66,6 +66,9 @@ node_modules/
 # ---- 各模型實作的執行輸出目錄（可重新產生） ----
 problems/*/experiments/*/out/
 
+# ---- Portable C++ toolchain（~918 MB，自行壓縮攜帶，不上傳 GitHub） ----
+tools/mingw64/
+
 # ---- 編輯器 / 雜項 ----
 *.log
 *.tmp

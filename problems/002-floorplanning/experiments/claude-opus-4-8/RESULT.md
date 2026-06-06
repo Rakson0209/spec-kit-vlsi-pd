@@ -1,9 +1,9 @@
-# claude-opus-4-8 — 002-floorplanning 結果
+﻿# claude-opus-4-8 — 002-floorplanning 結果
 
 - 模型 / 版本：Claude Opus 4.8（`claude-opus-4-8`，1M context）
 - SDD 產物（本模型自產）：見 [`./spec/`](./spec/)（spec / plan / research / data-model / contracts / tasks）
 - 演算法：線長導向建構式擺放 + **無網格 HPWL-only 模擬退火**（O(N²) 重疊檢查、增量 ΔHPWL、reheat-intensify 多回合）
-- 編譯指令：`g++ -std=c++11 -O3 -o hw3 main.cpp`
+- 編譯指令：`g++ -std=c++20 -O3 -o hw3 main.cpp`（專案內建 portable C++ 環境 `tools\mingw64\`）
 - 執行指令：`hw3 <input.txt> <output.floorplan>`（可選 `argv[3]`＝時間上限秒數；預設 120）
 - 隨機 seed：`20260605`（固定，mt19937）→ 可重現
 - 時間預算：預設 120s/測資（≤600s 硬上限內，兼顧 public2/3/4 的 ≤120s 目標）

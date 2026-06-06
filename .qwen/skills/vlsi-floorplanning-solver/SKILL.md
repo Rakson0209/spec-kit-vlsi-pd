@@ -1,6 +1,6 @@
----
+﻿---
 name: vlsi-floorplanning-solver
-description: C++11 fixed-outline floorplanning solver using grid-less SA with force-directed init and corner-based legalization
+description: C++20 fixed-outline floorplanning solver using grid-less SA with force-directed init and corner-based legalization
 source: auto-skill
 extracted_at: '2026-06-05T08:01:15.506Z'
 ---
@@ -9,7 +9,7 @@ extracted_at: '2026-06-05T08:01:15.506Z'
 
 ## Overview
 
-Implements a fixed-outline floorplanning solver in C++11 that reads `.txt` input (chip size, soft/fixed modules, nets) and produces `.floorplan` output minimizing weighted HPWL while satisfying legality constraints (no overlap, within outline, area/aspect ratio).
+Implements a fixed-outline floorplanning solver in C++20 that reads `.txt` input (chip size, soft/fixed modules, nets) and produces `.floorplan` output minimizing weighted HPWL while satisfying legality constraints (no overlap, within outline, area/aspect ratio).
 
 ## Algorithm Pipeline
 
@@ -133,7 +133,7 @@ Centers use integer floor division: `cx = x + w/2`.
 ## Build
 
 ```bash
-g++ -std=c++11 -O3 -Wall -Wextra -o hw3 main.cpp -lm
+g++ -std=c++20 -O3 -Wall -Wextra -o hw3 main.cpp -lm
 ```
 
 ## Usage

@@ -1,4 +1,4 @@
-# Implementation Plan: [FEATURE]
+﻿# Implementation Plan: [FEATURE]
 
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
 
@@ -51,7 +51,8 @@
 | V | **量化最佳化品質** | 是否定義明確最佳化目標並記錄數值，作為跨模型比較依據 | ⬜ |
 | VI | **研究先行，超越基準** | `research.md` 是否已：(1) 記錄 baseline 指標門檻；(2) 調研候選演算法與取捨；(3) 選定有潛力超越 baseline 的方案。未完成不得進入 tasks/implement | ⬜ |
 
-**編譯基準**: `g++ -std=c++11 -O3`；003 須連結 `reference/obj/*.o`。
+**編譯基準**: 專案內建 portable `g++ -std=c++20 -O3`（`tools\mingw64\`，見 `setup-env.bat`）；003 須連結 `reference/obj/*.o`。
+**加速選項**（內建編譯器已支援）：`-fopenmp`（OpenMP 平行）、`-pthread`（多執行緒）、`-I tools/boost`（Boost，需自行下載）。
 **評測三項數據**: 通過/失敗、最佳化指標、時間/開發回合數，缺一不可。
 
 **最佳化優先級**（計畫設計時必須遵守）:

@@ -1,0 +1,8 @@
+label,problem,case,metric_name,metric,valid,verifier,self_reported,violations
+qwen3.6-final,001-partitioning,public1,cut_size,173.0,True,,173.0,
+qwen3.6-final,001-partitioning,public2,cut_size,3473.0,True,,3473.0,
+qwen3.6-final,001-partitioning,public3,cut_size,3709.0,True,,3709.0,
+qwen3.6-final,001-partitioning,public4,cut_size,1686.0,True,,1686.0,
+qwen3.6-final,001-partitioning,public5,cut_size,888.0,True,,888.0,
+qwen3.6-final,001-partitioning,public6,cut_size,60409.0,True,,60409.0,
+qwen3.6-final,001-partitioning,sample,cut_size,1.0,True,,1.0,

@@ -61,6 +61,12 @@ node_modules/
 !.claude/commands/
 !.claude/skills/
 
+# ---- DeepSeek agent 本機 session 狀態（含 subagent 資料，非成果產物） ----
+.deepseek/
+
+# ---- 損毀/可重新取得的 Boost 壓縮檔，不納入版控 ----
+boost.zip
+
 # ---- spec-kit 本機工作狀態（當前 feature 指標，非成果產物） ----
 .specify/feature.json
 

@@ -16,7 +16,7 @@
 |---|---|---|---|
 | 001 partitioning | **cut size** | 同時有 cell 落在 DieA、DieB 的 net 數 | 各晶粒面積使用率 `area/(W·H) ≤ util`（各用自身 Tech 尺寸）、cell 恰分配一次 |
 | 002 floorplanning | **weighted HPWL** | `Σ weight·(\|cx1-cx2\|+\|cy1-cy2\|)`，pin 在模組中心、中心向下取整 | 輪廓內、面積≥min、長寬比∈[0.5,2]、無重疊、硬模組一致 |
-| 003 global placement | **HPWL** | 純 Python 解析 bookshelf，pin 全域座標 = 模組左下 + pin offset，`Σ(maxx-minx)+(maxy-miny)` | 可動模組皆有座標且在 core 內、固定模組(terminal/FIXED)未被移動 |
+| 003 global placement | **HPWL**（重疊態 global） | 純 Python 解析 bookshelf，pin 全域座標 = 模組左下 + pin offset，`Σ(maxx-minx)+(maxy-miny)` | 可動模組皆有座標且在 core 內、固定模組(terminal/FIXED)未被移動、**可合法化健康度**（內建 row-based legalizer 攤平後平均位移 ≤ 0.05×min(coreW,coreH)，封住「塌縮成一點得近零 HPWL」騙分） |
 
 ### 數值正確性（已驗證）
 

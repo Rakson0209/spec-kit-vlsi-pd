@@ -1,0 +1,6 @@
+label,problem,case,metric_name,metric,valid,verifier,self_reported,violations
+claude-opus-4-8,002-floorplanning,public1,wirelength,158054586.0,True,,158054586.0,
+claude-opus-4-8,002-floorplanning,public2,wirelength,24136170.0,True,,24136170.0,
+claude-opus-4-8,002-floorplanning,public3,wirelength,1918931.0,True,,1918931.0,
+claude-opus-4-8,002-floorplanning,public4,wirelength,62396925.0,True,,62396925.0,
+claude-opus-4-8,002-floorplanning,sample,wirelength,215.0,True,,215.0,

@@ -87,7 +87,29 @@ python scorer/score.py <problem-num> --output-dir <out-dir> --label <model>
 <!-- SPECKIT START -->
 ## Active Plan (managed by speckit)
 
-- **002-floorplanning** (shared spec, Phase 1 by claude-opus-4-8) — plan ready, next `/speckit.tasks`:
+- **003-global-placement** (shared spec, Phase 1 by claude-opus-4-8) — ✅ **plan ready**:
+  [plan.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/plan.md) ·
+  [research.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/research.md) ·
+  [data-model.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/data-model.md) ·
+  [contracts/](problems/003-global-placement/experiments/claude-opus-4-8/spec/contracts/) ·
+  [quickstart.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/quickstart.md)
+  — **Approach**: flat **analytical global placement** of std cells, **HPWL min subject to spreading**.
+  Key trap: HPWL scored on *overlapping* placement, but scorer's row-Tetris **anti-collapse health check**
+  rejects piles (`avgDisp ≤ 0.05×min(coreW,coreH)`) — so the **density term is what makes it legal**, not
+  polish ([legalize.py](scorer/lib/legalize.py)). L1 parser + CSR data model + constructive legal spread →
+  L2 **WA/LSE wirelength + bell-shaped bin-density + λ-ramp CG** (own solver), WL-aware init → L3
+  **OpenMP-parallel FG** + **adaptive bins** (reference's fixed 14×14 too coarse) + ~560s wall-clock guard +
+  multi-start. Metric = **unweighted** pin-offset HPWL (`.wts` ignored by scorer). Coords lower-left,
+  clamp-in-core on output. **R1 caveat**: `reference/obj/*.o` are **Linux ELF → unlinkable on Windows**, so
+  "copy reference/src" is infeasible; code is **self-contained**, R1 = *port reference algorithm not binary*.
+  Min/Reference/Max in [spec.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/spec.md)
+  (public1 Min 59.8M / Ref 88.0M · public2 10.5M / 18.6M · public3 395.1M / 750.9M, ≤590s).
+
+- **002-floorplanning** (shared spec, Phase 1 by claude-opus-4-8) — ✅ **opus implement done**
+  ([main.cpp](problems/002-floorplanning/experiments/claude-opus-4-8/main.cpp),
+  [RESULT.md](problems/002-floorplanning/experiments/claude-opus-4-8/RESULT.md)): 5/5 legal, beats
+  Reference on all 4 public (0.45×–0.73×), **beats Min on public1 0.978× & public4 0.990×** (public3
+  1.034×, public2 1.151×), ≤322s, R1 = keep self-written. Spec:
   [plan.md](problems/002-floorplanning/experiments/claude-opus-4-8/spec/plan.md) ·
   [research.md](problems/002-floorplanning/experiments/claude-opus-4-8/spec/research.md) ·
   [data-model.md](problems/002-floorplanning/experiments/claude-opus-4-8/spec/data-model.md) ·

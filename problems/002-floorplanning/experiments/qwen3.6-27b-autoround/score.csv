@@ -1,0 +1,6 @@
+label,problem,case,metric_name,metric,valid,verifier,self_reported,violations
+qwen3.6-parallel,002-floorplanning,public1,wirelength,185533146.0,True,,185533146.0,
+qwen3.6-parallel,002-floorplanning,public2,wirelength,32599969.0,True,,32599969.0,
+qwen3.6-parallel,002-floorplanning,public3,wirelength,2804123.0,True,,2804123.0,
+qwen3.6-parallel,002-floorplanning,public4,wirelength,71396025.0,True,,71396025.0,
+qwen3.6-parallel,002-floorplanning,sample,wirelength,215.0,True,,215.0,

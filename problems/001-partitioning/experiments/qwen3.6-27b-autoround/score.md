@@ -4,10 +4,10 @@
 
 | testcase | cut_size | 合法 | verifier | 自報 | 問題 |
 |---|---|---|---|---|---|
-| public1 | 173 | OK | - | 173 | utilA=0.700 utilB=0.621 |
-| public2 | 3473 | OK | - | 3473 | utilA=0.753 utilB=0.780 |
-| public3 | 3709 | OK | - | 3709 | utilA=0.641 utilB=0.700 |
-| public4 | 1686 | OK | - | 1686 | utilA=0.800 utilB=0.735 |
-| public5 | 888 | OK | - | 888 | utilA=0.798 utilB=0.761 |
-| public6 | 60409 | OK | - | 60409 | utilA=0.725 utilB=0.800 |
-| sample | 1 | OK | - | 1 | utilA=0.690 utilB=0.445 |
+| public1 | 193 | OK | - | 193 | utilA=0.639 utilB=0.749 |
+| public2 | 3353 | OK | - | 3353 | utilA=0.753 utilB=0.780 |
+| public3 | 1699 | OK | - | 1699 | utilA=0.659 utilB=0.672 |
+| public4 | 1780 | OK | - | 1780 | utilA=0.735 utilB=0.800 |
+| public5 | 741 | OK | - | 741 | utilA=0.798 utilB=0.798 |
+| public6 | 6064 | OK | - | 6064 | utilA=0.755 utilB=0.800 |
+| sample | 1 | OK | - | 1 | utilA=0.403 utilB=0.865 |

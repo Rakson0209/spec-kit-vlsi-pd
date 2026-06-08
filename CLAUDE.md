@@ -87,16 +87,22 @@ python scorer/score.py <problem-num> --output-dir <out-dir> --label <model>
 <!-- SPECKIT START -->
 ## Active Plan (managed by speckit)
 
-- **001-partitioning** (shared spec, Phase 1 by claude-opus-4-8) — plan ready, next `/speckit.tasks`:
-  [plan.md](problems/001-partitioning/experiments/claude-opus-4-8/spec/plan.md) ·
-  [research.md](problems/001-partitioning/experiments/claude-opus-4-8/spec/research.md) ·
-  [data-model.md](problems/001-partitioning/experiments/claude-opus-4-8/spec/data-model.md) ·
-  [contracts/](problems/001-partitioning/experiments/claude-opus-4-8/spec/contracts/) ·
-  [quickstart.md](problems/001-partitioning/experiments/claude-opus-4-8/spec/quickstart.md)
-  — **Approach**: layered hypergraph min-cut. L1 feasible greedy init (legal `.out`) → L2 area-constrained
-  **FM** refine (bucket gains, `F/T` counts, roll-back-to-best) → L3 **parallel multi-start** (OpenMP/pthread)
-  + **multilevel** for large cases. **No Boost** (`g++ -std=c++20 -O3 -fopenmp -pthread`). Move feasibility
-  uses `≤ cap + 1e-9` to match scorer (R6). R1 fallback = port `reference/src` off Boost. Min/Reference/Max
-  targets in [spec.md](problems/001-partitioning/experiments/claude-opus-4-8/spec/spec.md).
+- **002-floorplanning** (shared spec, Phase 1 by claude-opus-4-8) — plan ready, next `/speckit.tasks`:
+  [plan.md](problems/002-floorplanning/experiments/claude-opus-4-8/spec/plan.md) ·
+  [research.md](problems/002-floorplanning/experiments/claude-opus-4-8/spec/research.md) ·
+  [data-model.md](problems/002-floorplanning/experiments/claude-opus-4-8/spec/data-model.md) ·
+  [contracts/](problems/002-floorplanning/experiments/claude-opus-4-8/spec/contracts/) ·
+  [quickstart.md](problems/002-floorplanning/experiments/claude-opus-4-8/spec/quickstart.md)
+  — **Approach**: fixed-outline floorplanning, **pure-wirelength** objective (drop reference's `α·area`).
+  L1 guaranteed-legal shape gen + **grid-free** bottom-left pack (no `H×W` grid; `O(n²)` rect math) →
+  L2 **weighted-median** coordinate descent + SA (translate/swap/reshape, incremental HPWL) →
+  L3 **OpenMP parallel multi-start**. Pins at integer-floor centers `(x+w//2, y+h//2)`; strict-inequality
+  overlap (edge-touch legal), all integers (R6). R1 fallback = copy `reference/src` (**Boost-free** — no
+  porting) + pure-WL + parallel. Min/Reference/Max targets in
+  [spec.md](problems/002-floorplanning/experiments/claude-opus-4-8/spec/spec.md).
+
+- **001-partitioning** (shared spec, Phase 1 by claude-opus-4-8) — plan ready:
+  [plan.md](problems/001-partitioning/experiments/claude-opus-4-8/spec/plan.md) — layered hypergraph
+  min-cut (feasible greedy init → area-constrained **FM** → **parallel multi-start** + multilevel).
 <!-- SPECKIT END -->
 

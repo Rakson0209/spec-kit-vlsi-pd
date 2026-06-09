@@ -1,0 +1,4 @@
+label,problem,case,metric_name,metric,valid,verifier,self_reported,violations
+claude-opus-4-8,003-global-placement,public1,hpwl,46566011.015599936,True,,,
+claude-opus-4-8,003-global-placement,public2,hpwl,11389895.109169984,True,,,
+claude-opus-4-8,003-global-placement,public3,hpwl,358399034.2941999,True,,,

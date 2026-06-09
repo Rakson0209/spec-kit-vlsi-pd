@@ -87,23 +87,28 @@ python scorer/score.py <problem-num> --output-dir <out-dir> --label <model>
 <!-- SPECKIT START -->
 ## Active Plan (managed by speckit)
 
-- **003-global-placement** (shared spec, Phase 1 by claude-opus-4-8) — ✅ **plan ready**:
+- **003-global-placement** (shared spec, Phase 1 by claude-opus-4-8) — ✅ **opus implement done**
+  ([main.cpp](problems/003-global-placement/experiments/claude-opus-4-8/main.cpp),
+  [RESULT.md](problems/003-global-placement/experiments/claude-opus-4-8/RESULT.md)): **3/3 legal**,
+  **beats Reference on all 3** (0.48×–0.61×), **below Min on public1 & public3** (public1 46.6M vs Min 59.8M ·
+  public2 11.39M vs Ref 18.6M, +8% Min · public3 358M vs Min 395M); avgDisp 0.035–0.041× (<0.05), ≤72s,
+  **deterministic** (bit-exact reruns). **R1 = keep self-written.** Spec:
   [plan.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/plan.md) ·
   [research.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/research.md) ·
   [data-model.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/data-model.md) ·
   [contracts/](problems/003-global-placement/experiments/claude-opus-4-8/spec/contracts/) ·
   [quickstart.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/quickstart.md)
-  — **Approach**: flat **analytical global placement** of std cells, **HPWL min subject to spreading**.
-  Key trap: HPWL scored on *overlapping* placement, but scorer's row-Tetris **anti-collapse health check**
-  rejects piles (`avgDisp ≤ 0.05×min(coreW,coreH)`) — so the **density term is what makes it legal**, not
-  polish ([legalize.py](scorer/lib/legalize.py)). L1 parser + CSR data model + constructive legal spread →
-  L2 **WA/LSE wirelength + bell-shaped bin-density + λ-ramp CG** (own solver), WL-aware init → L3
-  **OpenMP-parallel FG** + **adaptive bins** (reference's fixed 14×14 too coarse) + ~560s wall-clock guard +
-  multi-start. Metric = **unweighted** pin-offset HPWL (`.wts` ignored by scorer). Coords lower-left,
-  clamp-in-core on output. **R1 caveat**: `reference/obj/*.o` are **Linux ELF → unlinkable on Windows**, so
-  "copy reference/src" is infeasible; code is **self-contained**, R1 = *port reference algorithm not binary*.
-  Min/Reference/Max in [spec.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/spec.md)
-  (public1 Min 59.8M / Ref 88.0M · public2 10.5M / 18.6M · public3 395.1M / 750.9M, ≤590s).
+  — **Approach**: self-contained analytical placement (ePlace family). L1 Bookshelf parse + CSR + constructive
+  legal spread → L2 **LSE wirelength (pin-offset, shifted) + bell bin-density + λ-ramp penalty via Adam**:
+  WL-dominant **cluster phase** (cells pile by connectivity, overlap OK) → ramp λ to spread back to legal
+  preserving arrangement → L3 **OpenMP FG** (fixed-order reduction = determinism) + ~560s guard.
+  **Key empirical finding (overturns research §4)**: *finer* bins **hurt** — they scramble the WL arrangement
+  (public3 33×33 → 1987M; **20×20 → 358M**, 5.5×); bins are a **global** spreading field — keep them **coarse**
+  (≈14–20/side, like reference's fixed 14×14). Legality gated by **porting scorer's Tetris legalizer into C++**
+  and freezing λ at the densest legal point (real avgDisp, not a proxy). Metric = **unweighted** pin-offset
+  HPWL; coords lower-left, clamp-in-core. **R1 caveat**: `reference/obj/*.o` are **Linux ELF → unlinkable on
+  Windows**, code is self-contained. Min/Reference/Max in
+  [spec.md](problems/003-global-placement/experiments/claude-opus-4-8/spec/spec.md).
 
 - **002-floorplanning** (shared spec, Phase 1 by claude-opus-4-8) — ✅ **opus implement done**
   ([main.cpp](problems/002-floorplanning/experiments/claude-opus-4-8/main.cpp),

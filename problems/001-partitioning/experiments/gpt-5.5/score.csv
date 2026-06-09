@@ -1,0 +1,8 @@
+label,problem,case,metric_name,metric,valid,verifier,self_reported,violations
+gpt-5.5-ml-restored,001-partitioning,public1,cut_size,104.0,True,,104.0,
+gpt-5.5-ml-restored,001-partitioning,public2,cut_size,880.0,True,,880.0,
+gpt-5.5-ml-restored,001-partitioning,public3,cut_size,1424.0,True,,1424.0,
+gpt-5.5-ml-restored,001-partitioning,public4,cut_size,917.0,True,,917.0,
+gpt-5.5-ml-restored,001-partitioning,public5,cut_size,289.0,True,,289.0,
+gpt-5.5-ml-restored,001-partitioning,public6,cut_size,11266.0,True,,11266.0,
+gpt-5.5-ml-restored,001-partitioning,sample,cut_size,1.0,True,,1.0,

@@ -1,0 +1,6 @@
+label,problem,case,metric_name,metric,valid,verifier,self_reported,violations
+gpt-5.5,002-floorplanning,public1,wirelength,175276050.0,True,,175276050.0,
+gpt-5.5,002-floorplanning,public2,wirelength,26308875.0,True,,26308875.0,
+gpt-5.5,002-floorplanning,public3,wirelength,2029090.0,True,,2029090.0,
+gpt-5.5,002-floorplanning,public4,wirelength,62979325.0,True,,62979325.0,
+gpt-5.5,002-floorplanning,sample,wirelength,215.0,True,,215.0,

@@ -1,0 +1,8 @@
+label,problem,case,metric_name,metric,valid,verifier,self_reported,violations
+fable-5,001-partitioning,public1,cut_size,100.0,True,,100.0,
+fable-5,001-partitioning,public2,cut_size,773.0,True,,773.0,
+fable-5,001-partitioning,public3,cut_size,1172.0,True,,1172.0,
+fable-5,001-partitioning,public4,cut_size,863.0,True,,863.0,
+fable-5,001-partitioning,public5,cut_size,653.0,True,,653.0,
+fable-5,001-partitioning,public6,cut_size,5468.0,True,,5468.0,
+fable-5,001-partitioning,sample,cut_size,1.0,True,,1.0,
